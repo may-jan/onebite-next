@@ -14,8 +14,9 @@ exports.__esModule = true;
 var global_layout_1 = require("@/components/global-layout");
 require("@/styles/globals.css");
 function App(_a) {
+    var _b;
     var Component = _a.Component, pageProps = _a.pageProps;
-    return (React.createElement(global_layout_1["default"], null,
-        React.createElement(Component, __assign({}, pageProps))));
+    var getLayout = (_b = Component.getLayout) !== null && _b !== void 0 ? _b : (function (page) { return page; });
+    return React.createElement(global_layout_1["default"], null, getLayout(React.createElement(Component, __assign({}, pageProps))));
 }
 exports["default"] = App;
