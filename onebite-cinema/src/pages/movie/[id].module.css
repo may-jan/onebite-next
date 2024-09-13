@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cover_img_container {
+  display: flex;
+  justify-content: center;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+
+.cover_img_container::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.cover_img_container img {
+  z-index: 1;
+  max-height: 350px;
+  padding: 20px;
+}
+
+.title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.releaseDate span::after {
+  content: ', ';
+}
+
+.releaseDate span:last-child::after {
+  content: '';
+}
+
+.subTitle {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.description {
+  line-height: 1.5;
+}
