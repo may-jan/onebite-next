@@ -20,7 +20,13 @@ export const getStaticProps = async () => {
   ]);
 
   // return 값은 반드시 props라는 객체여야 한다
-  return { props: { allBooks, recoBooks } };
+  return {
+    props: {
+      allBooks,
+      recoBooks,
+    },
+    revalidate: 3,
+  };
 };
 
 export default function Home({
