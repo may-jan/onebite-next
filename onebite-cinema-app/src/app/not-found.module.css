@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+}
+
+.container img {
+  width: 230px;
+  height: 230px;
+}
+
+.notFound {
+  font-size: 25px;
+  color: #617596;
+}
