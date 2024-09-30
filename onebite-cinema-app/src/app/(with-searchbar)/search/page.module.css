@@ -3,15 +3,3 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
 }
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
-}
-
-.loading img {
-  width: 45px;
-  height: 45px;
-}

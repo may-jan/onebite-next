@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 150%;
+  background-color: rgb(80, 80, 80);
+  animation: skeleton 1.5s infinite;
+  overflow: hidden;
+}
+
+@keyframes skeleton {
+  0% {
+    background-color: rgb(80, 80, 80);
+  }
+  50% {
+    background-color: rgb(130, 130, 130);
+  }
+  100% {
+    background-color: rgb(80, 80, 80);
+  }
+}
