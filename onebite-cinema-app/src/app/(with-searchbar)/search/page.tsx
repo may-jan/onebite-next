@@ -1,12 +1,11 @@
 import { MovieData } from '@/types';
 import style from './page.module.css';
 import MovieItem from '@/components/movie-item';
-import dealy from '@/util/delay';
 import { Suspense } from 'react';
 import MovieListSkeleton from '@/components/skeleton/skeleton/movie-list-skeleton';
+import { Metadata } from 'next';
 
 async function SearchResult({ q }: { q: string }) {
-  await dealy(1500);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
     { cache: 'force-cache' } // 동일한 검색어는 동일한 정보를 가져오기 때문에
@@ -27,11 +26,21 @@ async function SearchResult({ q }: { q: string }) {
   );
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { q?: string };
-}) {
+type Props = { searchParams: { q?: string } };
+
+export function generateMetadata({ searchParams }: Props): Metadata {
+  return {
+    title: `${searchParams.q} : 한입 시네마 검색`,
+    description: `${searchParams.q} 검색 결과입니다`,
+    openGraph: {
+      title: `${searchParams.q} : 한입 시네마 검색`,
+      description: `${searchParams.q} 검색 결과입니다`,
+      images: ['/thmubnail.png'],
+    },
+  };
+}
+
+export default async function Page({ searchParams }: Props) {
   return (
     <div className={style.container}>
       <Suspense

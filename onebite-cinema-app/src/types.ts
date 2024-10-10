@@ -8,6 +8,7 @@ export interface MovieData {
   genres: string[];
   runtime: number;
   posterImgUrl: string;
+  movieType: string | null;
 }
 
 export interface ReviewData {

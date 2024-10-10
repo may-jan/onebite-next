@@ -3,6 +3,8 @@ import style from './page.module.css';
 import { MovieData, ReviewData } from '@/types';
 import ReviewItem from '@/components/review-item';
 import ReviewEditor from '@/components/review-editor';
+import Image from 'next/image';
+import { Metadata } from 'next';
 
 export const dynamicParams = false;
 
@@ -38,7 +40,6 @@ async function MovieDetail({ movieId }: { movieId: string }) {
   const movie = await response.json();
 
   const {
-    id,
     title,
     subTitle,
     company,
@@ -55,7 +56,12 @@ async function MovieDetail({ movieId }: { movieId: string }) {
         className={style.cover_img_container}
         style={{ backgroundImage: `url('${posterImgUrl}')` }}
       >
-        <img src={posterImgUrl} />
+        <Image
+          src={posterImgUrl}
+          width={240}
+          height={300}
+          alt={`영화 ${title}의 포스터 이미지`}
+        />
       </div>
       <div className={style.info_container}>
         <div>
@@ -95,7 +101,33 @@ async function ReviewList({ movieId }: { movieId: string }) {
   );
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+type Props = { params: { id: string } };
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const movie: MovieData = await response.json();
+
+  return {
+    title: `${movie.title} - 한입시네마`,
+    description: `${movie.description}`,
+    openGraph: {
+      title: `${movie.title} - 한입시네마`,
+      description: `${movie.description}`,
+      images: [movie.posterImgUrl],
+    },
+  };
+}
+
+export default function Page({ params }: Props) {
   return (
     <div className={style.container}>
       <MovieDetail movieId={params.id} />
